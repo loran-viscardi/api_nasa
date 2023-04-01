@@ -1,6 +1,6 @@
 <?php
 // Definir a URL para a API da NASA
-$url = "https://api.nasa.gov/planetary/apod?api_key=SUA_API_KEY_AQUI";
+$url = "https://api.nasa.gov/planetary/apod?api_key=oiHpM7ULKs5FzKP3Wr5zn1OgQcdyNlwCcoFS5Wog";
 
 // Inicializar o cURL
 $ch = curl_init();

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NASA APOD</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="script.js"></script>
+</head>
+<body>
+	<h1>NASA Astronomy Picture of the Day</h1>
+	<div id="apod-container">
+		<h2 id="apod-date"></h2>
+		<img id="apod-image" src="" alt="">
+		<p id="apod-explanation"></p>
+	</div>
+</body>
+</html>
+#apod-container {
+	margin: 20px auto;
+	max-width: 800px;
+	text-align: center;
+}
+
+#apod-date {
+	font-size: 24px;
+	margin: 20px 0;
+}
+
+#apod-image {
+	max-width: 100%;
+}
+
+#apod-explanation {
+	margin: 20px 0;
+}
+$(document).ready(function() {
+	getAPOD();
+});
+
+function getAPOD() {
+	var url = "apod.php";
+	$.getJSON(url, function(data) {
+		console.log(data);
+		var date = data.date;
+		var title = data.title;
+		var explanation = data.explanation;
+		var image = data.url;
+		$("#apod-date").text(date);
+		$("#apod-image").attr("src", image);
+		$("#apod-image").attr("alt", title);
+		$("#apod-explanation").text(explanation);
+	});
+}
+<?php
+$date = date("Y-m-d");
+$url = "https://api.nasa.gov/planetary/apod?api_key=oiHpM7ULKs5FzKP3Wr5zn1OgQcdyNlwCcoFS5Wog&date=".$date;
+$response = file_get_contents($url);
+$data = json_decode($response, true);
+echo json_encode($data);
+?>
